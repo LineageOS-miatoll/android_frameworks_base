@@ -54,7 +54,6 @@ public final class PixelPropsUtils {
     private static final String DATA_FILE = "gms_certified_props.json";
 
     private static final String SPOOF_PIXEL_PI = "persist.sys.pixelprops.pi";
-    private static final String SPOOF_PIXEL_GAMES = "persist.sys.pixelprops.games";
 
     private static final Map<String, Object> propsToChangeGeneric;
     private static final Map<String, Object> propsToChangePixel9ProXL;
@@ -279,9 +278,6 @@ public final class PixelPropsUtils {
                 setPropValue(key, value);
             }
         } else {
-
-            if (!SystemProperties.getBoolean(SPOOF_PIXEL_GAMES, false))
-                return;
 
             if (Arrays.asList(packagesToChangeROG6).contains(packageName)) {
                 if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
