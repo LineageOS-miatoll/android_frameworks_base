@@ -43,8 +43,6 @@ public final class AttestationService extends SystemService {
     private static final long INTERVAL = 5;
 
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    private static final boolean SPOOF_PIXEL_PI =
-            SystemProperties.getBoolean("persist.sys.pixelprops.pi", true);
 
     private final Context mContext;
     private final File mDataFile;
@@ -62,9 +60,8 @@ public final class AttestationService extends SystemService {
 
     @Override
     public void onBootPhase(int phase) {
-        if (SPOOF_PIXEL_PI
-                && Utils.isPackageInstalled(mContext, "com.google.android.gms")
-                && phase == PHASE_BOOT_COMPLETED) {
+        if (Utils.isPackageInstalled(mContext, "com.google.android.gms") 
+            && phase == PHASE_BOOT_COMPLETED) {
             Log.i(TAG, "Scheduling the service");
             mScheduler.scheduleAtFixedRate(
                     new FetchGmsCertifiedProps(), INITIAL_DELAY, INTERVAL, TimeUnit.MINUTES);

@@ -53,8 +53,6 @@ public final class PixelPropsUtils {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final String DATA_FILE = "gms_certified_props.json";
 
-    private static final String SPOOF_PIXEL_PI = "persist.sys.pixelprops.pi";
-
     private static final Map<String, Object> propsToChangeGeneric;
     private static final Map<String, Object> propsToChangePixel9ProXL;
     private static final Map<String, Object> propsToChangePixelTablet;
@@ -384,8 +382,6 @@ public final class PixelPropsUtils {
     }
 
     private static void spoofBuildGms(Context context) {
-        if (!SystemProperties.getBoolean(SPOOF_PIXEL_PI, true))
-            return;
 
         File dataFile = new File(Environment.getDataSystemDirectory(), DATA_FILE);
         String savedProps = readFromFile(dataFile);
@@ -447,8 +443,6 @@ public final class PixelPropsUtils {
     }
 
     public static void onEngineGetCertificateChain() {
-        if (!SystemProperties.getBoolean(SPOOF_PIXEL_PI, true))
-            return;
         // Check stack for SafetyNet or Play Integrity
         if (isCallerSafetyNet() || sIsFinsky) {
             Log.i(TAG, "Blocked key attestation");
