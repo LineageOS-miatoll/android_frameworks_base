@@ -57,6 +57,7 @@ public final class PixelPropsUtils {
     private static final Map<String, Object> propsToChangePixel9ProXL;
     private static final Map<String, Object> propsToChangePixelTablet;
     private static final Map<String, Object> propsToChangePixelXL;
+    private static final Map<String, Object> propsToChangePixel3;
     private static final Map<String, Object> propsToChangeROG6;
     private static final Map<String, Object> propsToChangeLenovoY700;
     private static final Map<String, Object> propsToChangeOP8P;
@@ -81,8 +82,6 @@ public final class PixelPropsUtils {
             "com.google.android.apps.pixel.creativeassistant",
             "com.google.android.apps.pixel.support",
             "com.google.android.apps.privacy.wildlife",
-            "com.google.android.apps.wallpaper",
-            "com.google.android.apps.wallpaper.pixel",
             "com.google.android.apps.weather",
             "com.google.android.youtube",
             "com.google.android.apps.youtube.music",
@@ -90,9 +89,17 @@ public final class PixelPropsUtils {
             "com.google.android.googlequicksearchbox",
             "com.google.android.settings.intelligence",
             "com.google.android.wallpaper.effects",
-            "com.google.pixel.livewallpaper",
             "com.netflix.mediaclient",
             "com.nhs.online.nhsonline"
+    };
+
+    // Package to spoof as Pixel 3
+    private static final String[] packagesToChangePixel3 = {
+            "com.breel.wallpapers20",
+            "com.google.android.apps.wallpaper",
+            "com.google.android.apps.wallpaper.pixel",
+            "com.google.pixel.dynamicwallpapers",
+            "com.google.pixel.livewallpaper"
     };
 
     // Packages to Spoof as ROG Phone 6
@@ -200,6 +207,15 @@ public final class PixelPropsUtils {
         propsToChangePixelXL.put("MODEL", "Pixel XL");
         propsToChangePixelXL.put("ID", "QP1A.191005.007.A3");
         propsToChangePixelXL.put("FINGERPRINT", "google/marlin/marlin:10/QP1A.191005.007.A3/5972272:user/release-keys");
+        propsToChangePixel3 = new HashMap<>();
+        propsToChangePixel3.put("BRAND", "google");
+        propsToChangePixel3.put("MANUFACTURER", "Google");
+        propsToChangePixel3.put("DEVICE", "blueline");
+        propsToChangePixel3.put("PRODUCT", "blueline");
+        propsToChangePixel3.put("HARDWARE", "blueline");
+        propsToChangePixel3.put("MODEL", "Pixel 3");
+        propsToChangePixel3.put("ID", "RQ2A.210305.006");
+        propsToChangePixel3.put("FINGERPRINT", "google/blueline/blueline:11/RQ2A.210305.006/7119741:user/release-keys");
         propsToChangeROG6 = new HashMap<>();
         propsToChangeROG6.put("BRAND", "asus");
         propsToChangeROG6.put("MANUFACTURER", "asus");
@@ -338,6 +354,13 @@ public final class PixelPropsUtils {
             } else if (Arrays.asList(packagesToChangeS24U).contains(packageName)) {
                 if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
                 for (Map.Entry<String, Object> prop : propsToChangeS24U.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
+            } else if (Arrays.asList(packagesToChangePixel3).contains(packageName)) {
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangePixel3.entrySet()) {
                     String key = prop.getKey();
                     Object value = prop.getValue();
                     setPropValue(key, value);
