@@ -454,5 +454,6 @@ public class SecureSettingsValidators {
         VALIDATORS.put(Secure.ADVANCED_PROTECTION_MODE, BOOLEAN_VALIDATOR);
         // AndroidOne additions
         VALIDATORS.put(Secure.HIDE_DEVELOPER_STATUS, ANY_STRING_VALIDATOR);
+        VALIDATORS.put(Secure.KEYBOX_DATA, ANY_STRING_VALIDATOR);
     }
 }
